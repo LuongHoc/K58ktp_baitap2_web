@@ -131,7 +131,36 @@ Mở file, chỉnh sửa theo hướng dẫn (bỏ dấu #, sửa ServerName, b�
 
 Nhấn Ctrl+S để lưu.
 
+3.	Tạo thư mục web cá nhân
 
+D:\Apache24\luongvanhoc
+
+<img width="871" height="369" alt="image" src="https://github.com/user-attachments/assets/0d48d247-7373-4c4d-a709-0d93ed0f6f82" />
+
+4.	Sửa D:\Apache24\conf\extra\httpd-vhosts.conf (thêm VirtualHost mới)
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e3c03817-e833-4ec5-9fd7-019245832412" />
+
+5.	Fake domain vào hosts
+
+- Mở Notepad Run as administrator → file: C:\Windows\System32\drivers\etc\hosts
+
+- Thêm: 127.0.0.1    luongvanhoc.com
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/12eb762e-bf04-445a-803d-6c955e7605bc" />
+
+6. Cài dịch vụ & khởi động Apache
+
+- Mở CMD (Admin) tại D:\Apache24\bin:
+
+httpd.exe -k install -n "Apache24"
+httpd.exe -k start -n "Apache24"
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8353ab8a-1507-428a-8e11-360af4db1ca2" />
+
+Test: mở trình duyệt đến http://luongvanhoc.com/ 
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e5e4a69e-6add-453a-a794-4afb0cadd9d5" />
 
 
 
