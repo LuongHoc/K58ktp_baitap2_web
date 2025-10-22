@@ -202,6 +202,13 @@ node "D:\nodejs\nodered\node_modules\node-red\red.js" -u "D:\nodejs\nodered\work
   + cài đặt service `a1-nodered` bằng lệnh: nssm.exe install a1-nodered "D:\nodejs\nodered\run-nodered.cmd"
   + chạy service `a1-nodered` bằng lệnh: `nssm start a1-nodered`
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/de546ee0-bcb2-47fe-8b6c-16d7bdd47a87" />
+
+Test: mở http://localhost:1880/ (mặc định chưa bật adminAuth).
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/94c18673-c8ed-42a6-84b6-d18aecfdc3ee" />
+
+
 
 
 
