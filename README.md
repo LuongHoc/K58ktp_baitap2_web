@@ -164,7 +164,7 @@ Test: mở trình duyệt đến http://luongvanhoc.com/
 
 ## 2.Cài đặt nodejs và nodered
 
-2.1. Cài đặt nodejs
+### 2.1. Cài đặt nodejs
 
 download file: [https://nodejs.org/en/download](https://nodejs.org/dist/v20.19.5/node-v20.19.5-x64.msi)
 
@@ -176,7 +176,7 @@ nodejs đẫ được cài
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c470c4b4-99b7-4a28-8ffd-a2e0e2d6921d" />
 
-2.2. Cài đặt nodered
+### 2.2. Cài đặt nodered
 
 - chạy cmd, vào thư mục `D:\nodejs`, chạy lệnh: npm install -g --unsafe-perm node-red --prefix "D:\nodejs\nodered"
 
@@ -208,9 +208,21 @@ Test: mở http://localhost:1880/ (mặc định chưa bật adminAuth).
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/94c18673-c8ed-42a6-84b6-d18aecfdc3ee" />
 
+## 3. Tạo CSDL SQL Server 2022 + Data demo
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d9b8d10b-15ce-4c80-bfe0-f456e2681e28" />
 
+- ip 127.0.0.1 
 
+- port (mặc định 1433)
+
+- username : sa
+
+- password :123456
+
+- db_name = TourDB
+
+- table_name = KhachHang
 
 
 
