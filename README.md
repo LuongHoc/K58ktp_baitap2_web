@@ -224,6 +224,60 @@ Test: mở http://localhost:1880/ (mặc định chưa bật adminAuth).
 
 - table_name = KhachHang
 
+## 4. Cài node thư viện trên Node-RED + bật adminAuth
+
+### 4.1 truy cập giao diện nodered bằng url: http://localhost:1880
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6b707433-cdf2-4b11-b259-976c3f39eeaa" />
+
+- Menu → Manage palette → Install:
+
+ Tải các thư viện: node-red-contrib-mssql-plus, node-red-node-mysql, node-red-contrib-telegrambot, node-red-contrib-moment, node-red-contrib-influxdb, node-red-contrib-duckdns, node-red-contrib-cron-plus 
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/64cfb0a5-1ff4-4e72-9865-cd0d358e6bbe" />
+
+Các thư viện khác cài tương tự.
+
+### 4.2 Sửa file settings.js để bật đăng nhập admin
+
+- Mở file bằng Notepad (Run as administrator)
+
+- Đường dẫn: D:\nodejs\nodered\work\settings.js.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4108f8ef-f724-4159-bfa1-db475f4044ef" />
+
+mã hoá mật khẩu có thể thiết lập bằng tool: https://tms.tnut.edu.vn/pw.php
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9260cd79-23bc-4533-9c30-a06b5fe478a7" />
+
+tìm đến chỗ adminAuth, bỏ comment # ở đầu dòng (8 dòng), thay chuỗi mã hoá mật khẩu bằng chuỗi mới
+```
+    adminAuth: {
+        type: "credentials",
+        users: [{
+            username: "admin",
+            password: "$2y$10$j0J5eKKLGgUIBxAfI8zqL.y7dVFxnOmFqa4C37P8Q3A8y5pJlMVkm",
+            permissions: "*"
+        }]
+    },   
+```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6d12b1d5-b8de-4bc0-b4aa-658add95976f" />
+
+### 4.3 Lưu file → khởi động lại dịch vụ
+
+chạy lại nodered bằng cách: mở cmd, vào thư mục `D:\nodejs\nodered` và chạy lệnh `nssm restart a1-nodered`
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d4df6a7f-100f-49f6-8358-13093b0cf56e" />
+
+khi đó nodered sẽ yêu cầu nhập mật khẩu mới vào được giao diện cho admin tại: http://localhost:1880
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0382ed00-cfaf-46e2-ba61-e489f4590a12" />
+
+## 5.tạo api back-end bằng nodered
+
+
+
+
+
 
 
 
