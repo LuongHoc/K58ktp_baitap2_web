@@ -164,10 +164,43 @@ Test: mở trình duyệt đến http://luongvanhoc.com/
 
 ## 2.Cài đặt nodejs và nodered
 
+2.1. Cài đặt nodejs
+
+download file: [https://nodejs.org/en/download](https://nodejs.org/dist/v20.19.5/node-v20.19.5-x64.msi)
+
+Tải file MSI và cài vào: D:\nodejs 
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/68c8ce2b-7a1e-45d8-aa18-490cc2e4d3f0" />
+
+nodejs đẫ được cài
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c470c4b4-99b7-4a28-8ffd-a2e0e2d6921d" />
+
+2.2. Cài đặt nodered
+
+- chạy cmd, vào thư mục `D:\nodejs`, chạy lệnh: npm install -g --unsafe-perm node-red --prefix "D:\nodejs\nodered"
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/de022cda-ae41-425f-a1ae-2690a2f94d94" />
+
+- download file: https://nssm.cc/release/nssm-2.24.zip
+    giải nén được file nssm.exe
+    copy nssm.exe vào thư mục `D:\nodejs\nodered\`
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/324da56a-3825-402a-b99f-4c941d71fcc8" />
+
+- tạo file "D:\nodejs\nodered\run-nodered.cmd" với nội dung (5 dòng sau):
+@echo off
+REM fix path
+set PATH=D:\nodejs;%PATH%
+REM Run Node-RED
+node "D:\nodejs\nodered\node_modules\node-red\red.js" -u "D:\nodejs\nodered\work" %*
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1dd37d2d-6c83-4634-b1c2-6a3a56b89c87" />
 
 
-
-
+  + mở cmd, chuyển đến thư mục: `D:\nodejs\nodered`
+  + cài đặt service `a1-nodered` bằng lệnh: nssm.exe install a1-nodered "D:\nodejs\nodered\run-nodered.cmd"
+  + chạy service `a1-nodered` bằng lệnh: `nssm start a1-nodered`
 
 
 
