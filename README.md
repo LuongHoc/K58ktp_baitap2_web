@@ -95,11 +95,11 @@ GHI CHÚ:
 
 ### 1.1. Vô hiệu hoá IIS
 
-#### A. Nếu iis đang chạy thì mở cmd quyền admin để chạy lệnh: iisreset /stop
+- Nếu iis đang chạy thì mở cmd quyền admin để chạy lệnh: iisreset /stop
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0945e80f-f14d-4eb3-96fa-892575f2d710" />
 
-#### B. Download apache server, giải nén ra ổ D, cấu hình các file:
+### 1.2. Download apache server, giải nén ra ổ D, cấu hình các file:
 
 1. sau khi tải và giải nén file ra ổ D.
 
@@ -137,11 +137,11 @@ D:\Apache24\luongvanhoc
 
 <img width="871" height="369" alt="image" src="https://github.com/user-attachments/assets/0d48d247-7373-4c4d-a709-0d93ed0f6f82" />
 
-4.	Sửa D:\Apache24\conf\extra\httpd-vhosts.conf (thêm VirtualHost mới)
+4. Sửa D:\Apache24\conf\extra\httpd-vhosts.conf (thêm VirtualHost mới)
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e3c03817-e833-4ec5-9fd7-019245832412" />
+<img width="1683" height="813" alt="image" src="https://github.com/user-attachments/assets/31044cb9-e0d7-4965-99b0-06ed9b80a89b" />
 
-5.	Fake domain vào hosts
+### 1.3. Fake domain vào hosts
 
 - Mở Notepad Run as administrator → file: C:\Windows\System32\drivers\etc\hosts
 
@@ -149,7 +149,7 @@ D:\Apache24\luongvanhoc
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/12eb762e-bf04-445a-803d-6c955e7605bc" />
 
-6. Cài dịch vụ & khởi động Apache
+### 1.4. Cài dịch vụ & khởi động Apache
 
 - Mở CMD (Admin) tại D:\Apache24\bin:
 
@@ -162,6 +162,7 @@ Test: mở trình duyệt đến http://luongvanhoc.com/
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e5e4a69e-6add-453a-a794-4afb0cadd9d5" />
 
+## 2.Cài đặt nodejs và nodered
 
 
 
