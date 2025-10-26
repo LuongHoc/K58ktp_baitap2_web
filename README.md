@@ -210,7 +210,7 @@ Test: mở http://localhost:1880/ (mặc định chưa bật adminAuth).
 
 ## 3. Tạo CSDL SQL Server 2022 + Data demo
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d9b8d10b-15ce-4c80-bfe0-f456e2681e28" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c3e5ed56-5019-4d65-8911-d3d782623b8e" />
 
 - ip 127.0.0.1 
 
@@ -220,9 +220,9 @@ Test: mở http://localhost:1880/ (mặc định chưa bật adminAuth).
 
 - password :123456
 
-- db_name = TourDB
+- db_name = WebDevDemo
 
-- table_name = KhachHang
+- table_name = Students
 
 ## 4. Cài node thư viện trên Node-RED + bật adminAuth
 
@@ -274,9 +274,129 @@ khi đó nodered sẽ yêu cầu nhập mật khẩu mới vào được giao di
 
 ## 5.tạo api back-end bằng nodered
 
+API sẽ gồm 4 node chính:
+
+[HTTP in] → [Function: xử lý tham số] → [MSSQL-PLUS] → [HTTP response]
+
+Mỗi node đảm nhiệm:
+
+HTTP in → Nhận request từ trình duyệt (GET /timkiem).
+
+Function → Chuẩn bị câu SQL và tham số (query string).
+
+MSSQL-PLUS → Thực thi truy vấn trong SQL Server.
+
+HTTP response → Trả kết quả JSON cho client.
+
+### 5.1. Cấu hình chi tiết từng node
+A. HTTP in
+
+Method: GET
+
+URL: /timkiem
+
+→ Khi gọi http://localhost:1880/timkiem Node-RED sẽ kích hoạt flow này.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fbae5c2a-c9d1-4420-ae94-d4d595b54145" />
+
+B. Function (Xử lý tham số)
+
+- Thêm node function đặt tên: Xử lý tham số.
+- Thêm code:
+```
+//  Lấy tham số truy vấn từ URL, ví dụ: /timkiem?q=thi
+let tukhoa = (msg.req && msg.req.query && msg.req.query.q)
+    ? String(msg.req.query.q).trim()
+    : "";
+
+//  Header JSON + CORS (để frontend Apache gọi được)
+msg.headers = {
+    "Content-Type": "application/json; charset=utf-8",
+    "Access-Control-Allow-Origin": "*"
+};
+
+//  Chuẩn bị câu truy vấn SQL + tham số theo đúng bài mẫu
+//    - DÙNG THAM SỐ ĐẶT TÊN @keyword
+//    - COLLATE Vietnamese_100_CI_AI để không phân biệt dấu/hoa thường
+msg.payload = {
+    query: `
+    SELECT TOP 50
+      Id,
+      HoTen,         -- nếu bạn có cột 'Name' thì đổi 'HoTen' thành 'Name'
+      Lop,
+      DienThoai,
+      Email,
+      DiaChi
+    FROM dbo.Students
+    WHERE HoTen COLLATE Vietnamese_100_CI_AI LIKE @keyword
+       OR Email  COLLATE Vietnamese_100_CI_AI LIKE @keyword
+       OR Lop    COLLATE Vietnamese_100_CI_AI LIKE @keyword
+    ORDER BY HoTen;
+  `,
+    parameters: [
+        // tên param phải trùng @keyword ở trên
+        { name: "keyword", type: "NVarChar", value: `%${tukhoa}%` }
+    ]
+};
+
+//  KHÔNG gán msg.topic, KHÔNG gán msg.params, KHÔNG gán msg.payload chỗ khác
+return msg;
+```
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/df5f934d-d586-43d6-be71-0cf4b1811490" />
 
 
+C. MSSQL-PLUS
 
+Connection: trỏ tới SQL Server (Server: 127.0.0.1, Port: 1433, Database: WebDevDemo, Username/Password đúng; tick Trust Certificate)
+
+Query mode: Query
+
+Query: chọn msg. → gõ payload.query
+
+Parameters: chọn msg. → gõ payload.parameters
+
+Parse Mustache: bỏ chọn
+
+Output property: msg.payload
+
+Output type: Original output
+
+Error Handling: Send in msg.error
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ceae7151-fda7-4043-a95a-e9929bbeb01b" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0e46eed2-f3d5-413b-9031-344843f98d29" />
+
+D. Tạo node HTTP response
+
+- Status code: 200
+
+- Headers: add Content-Type: application/json
+
+- Node này sẽ gửi msg.payload (chính là kết quả SQL) ra trình duyệt.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fee5a684-6dc5-464a-89ec-3450403dd13e" />
+
+### 5.2. Kiểm thử API
+
+- Trình duyệt: http://localhost:1880/timkiem?q=văn
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/18a80da5-efbe-4f0c-bbd8-b7e50c159903" />
+
+## 5.Tạo giao diện front-end
+
+### 5.1. Chuẩn bị thư mục web
+
+Tạo thư mục: D:\Apache24\luongvanhoc
+
+Trong thư mục này tạo 3 file:
+
+index.html
+
+luongvanhoc.js
+
+luongvanhoc.css
 
 
 
